@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Margherita",
+    "price": 20
+  },
+  {
+    "id": 2,
+    "name": "Vegetariana",
+    "price": 22
+  },
+  {
+    "id": 3,
+    "name": "Tosca ",
+    "price": 25
+  },
+  {
+    "id": 4,
+    "name": "Venecia ",
+    "price": 25
+  }
+]

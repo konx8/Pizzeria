@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Pork chop with fries",
+    "price": 30
+  },
+  {
+    "id": 2,
+    "name": "Fish and chips",
+    "price": 28
+  },
+  {
+    "id": 3,
+    "name": "Hungarian pancake ",
+    "price": 27
+  }
+]

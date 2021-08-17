@@ -1,5 +1,6 @@
 package com.example.Pizza.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -21,13 +22,29 @@ import java.util.Set;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
     private Long id;
-    private String orderName;
+    //private String orderName;
 
+    public void setProduct(Class type){
+
+        if(type.toString().equals(Pizza.class.toString())){
+            List<Pizza> pizza;
+        }
+        if(type.equals(Drink.class)){
+            List<Drink> Drink;
+        }
+
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    @JsonIgnore
+    private Customer customer;
 
     @OneToMany(mappedBy = "order")
     private List<PizzaOrder> pizzaOrders;
+
 
 
 }

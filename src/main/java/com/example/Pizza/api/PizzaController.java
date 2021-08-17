@@ -13,14 +13,15 @@ import org.springframework.web.bind.annotation.*;
 
 public class PizzaController {
 
-    private final PizzaRepo pizzaRepo;
     private final PizzaService pizzaService;
+    private PizzaRepo pizzaRepo;
 
 
     @GetMapping("/pizzas")
     public Iterable<Pizza> getPizza(){
-       return pizzaRepo.findAll();
+       return pizzaService.getAllPizza();
     }
+
     @PostMapping("/pizza")
     public Pizza addPizza(@RequestBody Pizza pizza){
         return pizzaRepo.save(pizza);
@@ -33,7 +34,7 @@ public class PizzaController {
 
     @GetMapping("/list")
     public Iterable<Pizza> list() {
-        return pizzaService.list();
+        return pizzaService.getAllPizza();
     }
 
 
