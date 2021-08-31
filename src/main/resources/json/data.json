@@ -1,0 +1,93 @@
+[
+  {
+    "id": 1,
+    "name": "Margherita",
+    "price": 20
+  },
+  {
+    "id": 2,
+    "name": "Vegetariana",
+    "price": 22
+  },
+  {
+    "id": 3,
+    "name": "Tosca ",
+    "price": 25
+  },
+  {
+    "id": 4,
+    "name": "Venecia ",
+    "price": 25
+  },
+  {
+    "id": 5,
+    "name": "Coffe",
+    "price": 5
+  },
+  {
+    "id": 6,
+    "name": "Tea",
+    "price": 5
+  },
+  {
+    "id": 7,
+    "name": "Cola ",
+    "price": 5
+  },
+  {
+    "id": 8,
+    "name": "Pork chop with fries",
+    "price": 30
+  },
+  {
+    "id": 9,
+    "name": "Fish and chips",
+    "price": 28
+  },
+  {
+    "id": 10,
+    "name": "Hungarian pancake ",
+    "price": 27
+  },
+  {
+    "id": 11,
+    "name": "Double Chees",
+    "price": 2
+  },
+  {
+    "id": 12,
+    "name": "Salami",
+    "price": 2
+  },
+  {
+    "id": 13,
+    "name": "Ham ",
+    "price": 2
+  },
+  {
+    "id": 14,
+    "name": "Mushrooms ",
+    "price": 2
+  },
+  {
+    "id": 15,
+    "name": "Salad bar",
+    "price": 5
+  },
+  {
+    "id": 16,
+    "name": "Set of sauces",
+    "price": 6
+  },
+  {
+  "id": 17,
+  "name": "Tomato soup",
+  "price": 10
+    },
+  {
+    "id": 18,
+    "name": "Chicken soup",
+    "price": 12
+  }
+
+]

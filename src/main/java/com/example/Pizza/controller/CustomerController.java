@@ -1,9 +1,12 @@
-package com.example.Pizza.api;
+package com.example.Pizza.controller;
 
 import com.example.Pizza.entity.Customer;
+import com.example.Pizza.entity.Order;
 import com.example.Pizza.service.CustomerService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,6 +19,12 @@ public class CustomerController {
     public Iterable<Customer> getCustomers(){
         return customerService.getCustomers();
     }
+
+    @PostMapping("/addCustomer")
+    public Customer addCustomer(@RequestBody Customer customer){
+        return customerService.addCustomer(customer);
+    }
+
 
 
 }
