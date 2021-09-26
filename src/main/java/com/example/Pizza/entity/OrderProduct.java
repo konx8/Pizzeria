@@ -33,6 +33,10 @@ public class OrderProduct {
     private int quantity;
 
     private LocalDateTime data;
-    //private Timestamp time;
+
+    public OrderProduct( int quantity) {
+        this.quantity = quantity;
+    }
+
 
 }

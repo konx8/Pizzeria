@@ -4,6 +4,7 @@ import com.example.Pizza.entity.Customer;
 import com.example.Pizza.entity.Order;
 import com.example.Pizza.service.CustomerService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

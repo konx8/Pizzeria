@@ -20,7 +20,13 @@ public class OrderService {
     public Order addOrder(Order order){
         return orderRepo.save(order);
     }
+    public Long findLastId(){
+        return orderRepo.lastId();
+    }
 
+    public Long getOrderIdByCustomerID(Long id){
+        return orderRepo.getOrderIdByCustomerID(id);
+    }
 
 
 }

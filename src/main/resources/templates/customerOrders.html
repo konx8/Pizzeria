@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzeria</title>
+    <link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/">
+</head>
+<body>
+<div align="center">
+<h1>Yours Orders</h1>
+
+    <a th:href="@{home}">Home</a>
+    <a th:href="@{menu}">Menu</a>
+
+<table>
+    <thead>
+    <tr>
+        <th> ID </th>
+        <th> Data </th>
+        <th> Product </th>
+        <th> Quantity </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="order : ${orders}"  >
+        <form th:action="@{/customerOrders}" th:object="${orders}" method="get">
+            <td><span th:text="${order.id}" > </span></td>
+            <td><span th:text="${order.data}" > </span></td>
+            <td><span th:text="${order.product}"> </span></td>
+            <td><span th:text="${order.quantity }">  </span></td>
+        </form>
+    </tr>
+    </tbody>
+    <br>
+
+
+
+
+</table>
+</div>
+
+</body>
+</html>

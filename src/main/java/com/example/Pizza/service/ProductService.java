@@ -5,6 +5,8 @@ import com.example.Pizza.repository.ProductRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @AllArgsConstructor
@@ -17,5 +19,8 @@ public class ProductService {
     }
 
 
+    public List<Product> getProductsList(){
+        return productRepo.findAll();
+    }
 
 }

@@ -36,7 +36,8 @@ public class OrderProductController {
 
 
     @PostMapping("/customerOrder")
-    public ResponseEntity<Iterable<OrderProduct>> addProductToList(@RequestBody Iterable<OrderProduct> orderProduct, @RequestParam(name = "id") Long id){
+    public ResponseEntity<Iterable<OrderProduct>> addProductToList(@RequestBody Iterable<OrderProduct> orderProduct,
+                                                                   @RequestParam(name = "id") Long id){
 
         if (orderProductService.existsByOrderId(id)){
             return ResponseEntity.ok(orderProductService.saveProduct(orderProduct,id));
@@ -45,6 +46,18 @@ public class OrderProductController {
             return ResponseEntity.notFound().build();
         }
     }
+
+//    @PostMapping("/setProductList")
+//    public ResponseEntity<OrderProduct> addProductToList2(@RequestBody OrderProduct orderProduct,
+//                                                                   @RequestParam(name = "id") Long id){
+//        if (orderProductService.existsByOrderId(id)){
+//            return ResponseEntity.ok(orderProductService.saveSingleProduct(orderProduct, id));
+//        }
+//        else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
+
     @GetMapping("/getOrder")
     public List<OrderProduct> findOrderProductByOrderId(@RequestParam(name = "id") Long id){
         return orderProductService.findOrderProductByOrderId(id);

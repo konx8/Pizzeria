@@ -32,20 +32,11 @@ public class OrderController {
         return orderService.addOrder(order);
     }
 
+    @GetMapping("/lastID")
+    public Long lastID(){
+        return orderService.findLastId();
+    }
 
-
-
-
-//    @GetMapping("/order")
-//    public Set<OrderProduct> getCustomerOrder(@RequestParam(name = "Id")Long ordersId){
-//        return orderService.getProducts(ordersId);
-//    }
-
-
-//    @GetMapping("/showOrder")
-//    public Set<Order> showOrder(@RequestParam(name = "orderId")Long orderId) {
-//        return (Set<Order>) orderService.(orderId);
-//    }
 
 
 }

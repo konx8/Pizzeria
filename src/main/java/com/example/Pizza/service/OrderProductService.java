@@ -5,6 +5,7 @@ import com.example.Pizza.entity.OrderProduct;
 import com.example.Pizza.repository.OrderProductRepo;
 import com.example.Pizza.repository.OrderRepo;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -14,8 +15,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-
-
 
 @Service
 @AllArgsConstructor
@@ -31,10 +30,6 @@ public class OrderProductService {
     }
 
 
-//    public Optional<OrderProduct> findByOrderId(Long id){
-//        return orderProductRepo.findByOrderId(id);
-//    }
-
     public Iterable<OrderProduct> getByCustomerId(Long id){
         return orderProductRepo.findByCustomerId(id);
     }
@@ -48,13 +43,17 @@ public class OrderProductService {
         for(OrderProduct orderP:orderProduct){
             orderP.setOrder(order);
             orderP.setData(LocalDateTime.now());
-
-
         }
-
         return orderProductRepo.saveAll(orderProduct);
-
     }
+
+    public OrderProduct saveSingleProduct(OrderProduct orderProduct, Long id){
+        Order order = orderRepo.getById(id);
+        orderProduct.setOrder(order);
+        orderProduct.setData(LocalDateTime.now());
+        return orderProductRepo.save(orderProduct);
+    }
+
 
 
     public boolean existsByOrderId(Long id) {
@@ -67,7 +66,6 @@ public class OrderProductService {
 
 
     }
-
 
     public int getBill(Long id){
         List<OrderProduct> orderProduct = orderProductRepo.findByOrderId(id);
@@ -82,7 +80,6 @@ public class OrderProductService {
         return totalPrice;
 
     }
-
 
 
     /////////////////// EMAIL ////////////////////

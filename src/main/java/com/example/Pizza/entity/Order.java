@@ -35,4 +35,7 @@ public class Order {
     @JsonIgnore
     private List<OrderProduct> orderProducts;
 
+    public Order(Customer customer) {
+        this.customer = customer;
+    }
 }
