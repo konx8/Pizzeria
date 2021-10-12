@@ -11,15 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @AllArgsConstructor
 public class OrderProductController {
 
-    private static final Logger logger = LoggerFactory.getLogger(OrderProductController.class);
     private OrderProductService orderProductService;
+
 
     @GetMapping("/getAllOrders")
     public Iterable<OrderProduct> getAllOrderProducts(){
@@ -47,17 +45,6 @@ public class OrderProductController {
         }
     }
 
-//    @PostMapping("/setProductList")
-//    public ResponseEntity<OrderProduct> addProductToList2(@RequestBody OrderProduct orderProduct,
-//                                                                   @RequestParam(name = "id") Long id){
-//        if (orderProductService.existsByOrderId(id)){
-//            return ResponseEntity.ok(orderProductService.saveSingleProduct(orderProduct, id));
-//        }
-//        else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
-
     @GetMapping("/getOrder")
     public List<OrderProduct> findOrderProductByOrderId(@RequestParam(name = "id") Long id){
         return orderProductService.findOrderProductByOrderId(id);
@@ -73,7 +60,5 @@ public class OrderProductController {
         orderProductService.dataToEmail(email,id);
         return "wysłano";
     }
-
-
 
 }

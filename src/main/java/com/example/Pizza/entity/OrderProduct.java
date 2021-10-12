@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -30,6 +31,7 @@ public class OrderProduct {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @Valid()
     private int quantity;
 
     private LocalDateTime data;
@@ -37,6 +39,5 @@ public class OrderProduct {
     public OrderProduct( int quantity) {
         this.quantity = quantity;
     }
-
 
 }

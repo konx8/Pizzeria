@@ -33,7 +33,7 @@ public class CustomerService {
 
     public Long getIdByCustomerName(String name) throws NonUniqueResultException {
         return customerRepo.getIdByName(name);
-    }
 
+    }
 
 }

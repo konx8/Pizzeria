@@ -11,7 +11,7 @@ public interface CustomerRepo extends JpaRepository<Customer, Long> {
 
     Boolean existsByName(String name);
 
-    @Query(value = "SELECT TOP 1 id FROM CUSTOMER WHERE name = name", nativeQuery = true)
+    @Query(value = "SELECT * FROM CUSTOMER WHERE name = :name", nativeQuery = true)
     Long getIdByName(String name);
 
 }

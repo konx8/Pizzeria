@@ -4,6 +4,8 @@ import com.example.Pizza.entity.Order;
 import com.example.Pizza.entity.OrderProduct;
 import com.example.Pizza.repository.OrderProductRepo;
 import com.example.Pizza.repository.OrderRepo;
+import com.example.Pizza.view.CustomerInputView;
+import com.example.Pizza.view.OrderProductView;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,14 +28,42 @@ public class OrderProductService {
 
     private MailService mailService;
 
+    public List<OrderProductView> listOfOrderedProductView(Long orderID){
+
+        List<OrderProduct> orderProductsList = orderProductRepo.findAllOrderProductByOrderID(orderID);
+        List<OrderProductView> orderProductViewList = new ArrayList<>();
+
+        for(OrderProduct product:orderProductsList){
+
+            OrderProductView orderProductView = new OrderProductView();
+
+            orderProductView.setId(product.getId());
+            orderProductView.setOrderID(product.getOrder().getId());
+            orderProductView.setProductID(product.getProduct().getId());
+            orderProductView.setQuantity(product.getQuantity());
+            orderProductView.setData(product.getData());
+
+            orderProductViewList.add(orderProductView);
+        }
+        return orderProductViewList;
+    }
+
+    public boolean existsById(Long id){
+        return orderProductRepo.existsById(id);
+    }
+
     public Iterable<OrderProduct> getAllOrderProducts(){
         return orderProductRepo.findAll();
     }
 
-
     public Iterable<OrderProduct> getByCustomerId(Long id){
         return orderProductRepo.findByCustomerId(id);
     }
+
+    public void deleteOrder(Long id ){
+        orderProductRepo.deleteById(id);
+    }
+
 
 /////////////////////////////////////////////////////////////////
 
@@ -54,17 +85,12 @@ public class OrderProductService {
         return orderProductRepo.save(orderProduct);
     }
 
-
-
     public boolean existsByOrderId(Long id) {
         return orderRepo.existsById(id);
-
     }
 
     public List<OrderProduct> findOrderProductByOrderId(Long id){
         return orderProductRepo.findByOrderId(id);
-
-
     }
 
     public int getBill(Long id){
@@ -78,7 +104,6 @@ public class OrderProductService {
             totalPrice = totalPrice+ sum;
         }
         return totalPrice;
-
     }
 
 
@@ -101,5 +126,4 @@ public class OrderProductService {
         mailService.sendMail(email,"Order",productList,true);
 
     }
-
 }

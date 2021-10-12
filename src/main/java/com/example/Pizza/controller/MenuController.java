@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.mail.MessagingException;
+
 
 @Controller
 @AllArgsConstructor
@@ -22,13 +24,12 @@ public class MenuController {
     public MainPageController mainPageController;
 
     @GetMapping("/menu")
-    public String getAllProductList(Model model){
+    public String getAllProductList(Model model) {
         model.addAttribute("products", productService.getProductsList() );
-        //model.addAttribute("addProduct", orderProductService.saveSingleProduct())
         model.addAttribute("addOrders", new OrderProduct());
         model.addAttribute("customer", customerService.getCustomer(getOrderIdByCustomerName()));
         model.addAttribute("name", mainPageController.returnCustomerName());
-
+        model.addAttribute("bill", customerBill());
         return "menu";
     }
 
@@ -36,12 +37,14 @@ public class MenuController {
         Long customerId = customerService.getIdByCustomerName(mainPageController.returnCustomerName());
         return orderService.getOrderIdByCustomerID(customerId);
     }
-
-
-    public Long getIdProduct(){
-
-
-        return null;
+    @GetMapping("/email")
+    public String sendEmail() throws MessagingException {
+        orderProductService.dataToEmail(mainPageController.returnCustomerName(),getOrderIdByCustomerName());
+        return "redirect:/menu";
+    }
+    @GetMapping("/bill")
+    public int customerBill() {
+        return orderProductService.getBill(getOrderIdByCustomerName());
     }
 
 

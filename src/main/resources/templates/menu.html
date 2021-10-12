@@ -14,34 +14,64 @@
 
         <form th:object="${customer}" method="get">
         </form>
-        <table>
+        <table th:cellpadding="10px">
             <thead>
             <tr>
                 <th> Number </th>
                 <th> Name </th>
                 <th> Price </th>
-                <th> Quantity </th>
             </tr>
             </thead>
             <tbody>
+            <form th:action="@{/order}" th:object="${addOrders}" method="post">
+                <tr th:each="prod : ${products}"  >
 
-            <tr th:each="prod : ${products}"  >
-                <form th:action="@{/order}" th:object="${addOrders}" method="post">
-                    <td><span th:text="${prod.id}" > <input type="text" th:field="*{product.id}" > </span></td>
-                    <td><span th:text="${prod.name}" > </span></td>
-                    <td><span th:text="${prod.price } + PLN">  </span></td>
-                    <td><span> <input type="text" th:field="*{quantity}" > </span></td>
-                    <td><span> <input type="submit" value="Add"> </span></td>
-                </form>
-            </tr>
+                        <td><span th:text="${prod.id}"  >  </span></td>
+                        <td><span th:text="${prod.name}" > </span></td>
+                        <td><span th:text="${prod.price } + PLN">  </span></td>
+
+
+                </tr>
+                <label>Product number : </label>
+                <span> <input type="number" min="1" max="18" th:field="*{product.id}" > </span>
+                <label>Quantity : </label>
+                <span> <input type="number" min="1" max="18"th:field="*{quantity}" > </span>
+
+
+                <span> <input type="submit" value="Add product"> </span>
+                <br>
+                <br>
+            </form>
             </tbody>
 
             <br>
-            <a th:href="@{home}">Home</a>
-            <a th:href="@{customerOrders}">Basket</a>
 
         </table>
+
+        <br>
+        <br>
+        <form th:action="@{bill}">
+            <label> Total Price:  </label>
+            <label th:text="${bill}"></label>
+        </form>
+
+        <br>
+        <form th:action="@{'/home'}">
+            <button type="submit"> Home</button>
+        </form>
+        <br>
+        <form th:action="@{'/customerOrders'}">
+            <button type="submit"> Basket</button>
+        </form>
+        <br>
+
+
+
+
     </div>
+
+
+
 
 </body>
 </html>

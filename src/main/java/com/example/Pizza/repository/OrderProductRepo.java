@@ -7,8 +7,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @Repository
 public interface OrderProductRepo extends JpaRepository<OrderProduct, Long> {
@@ -18,5 +16,10 @@ public interface OrderProductRepo extends JpaRepository<OrderProduct, Long> {
     Iterable<OrderProduct> findByCustomerId(@Param("id") Long id);
 
     List<OrderProduct> findByOrderId(Long id);
+
+    @Query(value = "SELECT * FROM ORDER_PRODUCT where order_id = ?1" , nativeQuery=true)
+    List<OrderProduct> findAllOrderProductByOrderID(Long orderId);
+
+    boolean existsById(Long id);
 
 }

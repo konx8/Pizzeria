@@ -15,13 +15,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.PublicKey;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 @Controller
 @AllArgsConstructor
 @Data
 public class MainPageController{
 
-    public ProductService productService;
     public CustomerService customerService;
     public OrderService orderService;
     public OrderProductService orderProductService;
@@ -30,22 +33,31 @@ public class MainPageController{
     @GetMapping("/home")
     public String getAllProductList(Model model){
         model.addAttribute("addCust", new Customer());
+
         return "mainPage";
     }
 
     @PostMapping("/cus")
     public String addCustomer(@ModelAttribute Customer customer) {
-        if(customer.getName().isEmpty()){
+        Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+        Matcher mat = pattern.matcher(customer.getName());
+
+        if(customer.getName().isEmpty()) {
             return "redirect:/home";
-        }else {
-            if (customerService.ifExist(customer.getName())) {
-                return "redirect:/customerOrders";
-            } else {
+        }
+
+        if (customerService.ifExist(customer.getName()) ) {
+
+            customerName(customer);
+            return "redirect:/customerOrders";
+        } else {
+            if(mat.matches()){
                 customerService.addCustomer(customer);
                 orderService.addOrder(new Order(customer));
                 customerName(customer);
                 return "redirect:/menu";
             }
+            return "redirect:/home";
         }
     }
 
@@ -58,12 +70,13 @@ public class MainPageController{
         return nameCUST;
     }
 
-
     @PostMapping("/order")
     public String setOrder(@ModelAttribute OrderProduct orderProduct){
-        orderProductService.saveSingleProduct(orderProduct, orderService.findLastId());
+        Long customerId = customerService.getIdByCustomerName(returnCustomerName());
+        orderProductService.saveSingleProduct(orderProduct, customerId);
         return "redirect:/menu";
     }
+
 
 
 
