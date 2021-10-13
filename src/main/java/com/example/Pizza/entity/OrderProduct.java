@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -35,9 +32,5 @@ public class OrderProduct {
     private int quantity;
 
     private LocalDateTime data;
-
-    public OrderProduct( int quantity) {
-        this.quantity = quantity;
-    }
 
 }

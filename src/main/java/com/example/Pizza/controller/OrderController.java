@@ -15,8 +15,6 @@ public class OrderController {
 
     private OrderService orderService;
 
-
-
     @GetMapping("/orders")
     ResponseEntity<?> getOrder(){
         return ResponseEntity.ok(orderService.getOrders());

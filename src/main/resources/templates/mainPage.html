@@ -1,27 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pizzeria</title>
+    </head>
+    <body>
+        <div align="center">
+            <h1>Pizzeria</h1>
+            <form th:action="@{/cus}" th:object="${addCust}" method="post" class="form">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizzeria</title>
-    <link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/">
-</head>
-<body>
-<div align="center">
-<h1>Pizzeria</h1>
-
-    <form th:action="@{/cus}" th:object="${addCust}" method="post" class="form">
-        <div class="form-group">
-        <p><label>Give your email below:</label></p>
-
-        <p><input type="email" th:required="email" th:field="*{name}" id="name" placeholder="Email"></p>
-
-        <br>
+                <p><label>Give your email below:</label></p>
+                <p><input type="email" th:required="email" th:field="*{name}" id="name" placeholder="Email"></p>
+                <br>
+                <p><input type="submit" class="btn btn-success" value="Accept"></p>
+            </form>
         </div>
-        <p><input type="submit" class="btn btn-success" value="Accept"></p>
-    </form>
-</div>
-</body>
-
+    </body>
 </html>

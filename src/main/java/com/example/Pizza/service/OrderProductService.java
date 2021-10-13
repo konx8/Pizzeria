@@ -4,19 +4,13 @@ import com.example.Pizza.entity.Order;
 import com.example.Pizza.entity.OrderProduct;
 import com.example.Pizza.repository.OrderProductRepo;
 import com.example.Pizza.repository.OrderRepo;
-import com.example.Pizza.view.CustomerInputView;
 import com.example.Pizza.view.OrderProductView;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -25,8 +19,8 @@ public class OrderProductService {
 
     private OrderProductRepo orderProductRepo;
     private OrderRepo orderRepo;
-
     private MailService mailService;
+
 
     public List<OrderProductView> listOfOrderedProductView(Long orderID){
 
@@ -108,7 +102,6 @@ public class OrderProductService {
 
 
     /////////////////// EMAIL ////////////////////
-
 
     public void dataToEmail(String email,Long id) throws MessagingException {
         List<OrderProduct> orderProduct = orderProductRepo.findByOrderId(id);

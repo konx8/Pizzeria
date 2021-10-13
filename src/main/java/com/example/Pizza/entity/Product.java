@@ -2,13 +2,11 @@ package com.example.Pizza.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,7 +24,6 @@ public class Product {
     private String name;
 
     private int price;
-
 
     @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
     @JsonIgnore

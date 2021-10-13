@@ -16,7 +16,6 @@ public class MailService {
 
     private JavaMailSender javaMailSender;
 
-
     public void sendMail(String to,
                          String subject,
                          String text,

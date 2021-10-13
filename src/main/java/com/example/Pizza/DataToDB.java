@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-@JsonInclude(JsonInclude.Include.NON_NULL)
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Component
 @AllArgsConstructor
 public class DataToDB {

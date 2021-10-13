@@ -4,8 +4,6 @@ import com.example.Pizza.entity.OrderProduct;
 import com.example.Pizza.service.OrderProductService;
 import lombok.AllArgsConstructor;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +27,6 @@ public class OrderProductController {
     public Iterable<OrderProduct> getCustomerId(@RequestParam(name = "id") Long id){
         return orderProductService.getByCustomerId(id);
     }
-
-/////////////////////////////////////////////////////////////////
-
 
     @PostMapping("/customerOrder")
     public ResponseEntity<Iterable<OrderProduct>> addProductToList(@RequestBody Iterable<OrderProduct> orderProduct,
@@ -58,7 +53,7 @@ public class OrderProductController {
     @GetMapping("/sendMail/{email}/{id}")
     public String sendMail(@PathVariable  String email,@PathVariable  Long id) throws MessagingException {
         orderProductService.dataToEmail(email,id);
-        return "wysłano";
+        return "send";
     }
 
 }

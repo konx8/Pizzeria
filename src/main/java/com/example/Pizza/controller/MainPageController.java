@@ -6,7 +6,6 @@ import com.example.Pizza.entity.OrderProduct;
 import com.example.Pizza.service.CustomerService;
 import com.example.Pizza.service.OrderProductService;
 import com.example.Pizza.service.OrderService;
-import com.example.Pizza.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Controller;
@@ -14,8 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.security.PublicKey;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,7 +30,6 @@ public class MainPageController{
     @GetMapping("/home")
     public String getAllProductList(Model model){
         model.addAttribute("addCust", new Customer());
-
         return "mainPage";
     }
 
@@ -41,11 +37,9 @@ public class MainPageController{
     public String addCustomer(@ModelAttribute Customer customer) {
         Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
         Matcher mat = pattern.matcher(customer.getName());
-
         if(customer.getName().isEmpty()) {
             return "redirect:/home";
         }
-
         if (customerService.ifExist(customer.getName()) ) {
 
             customerName(customer);

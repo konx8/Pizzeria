@@ -1,77 +1,60 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pizzeria</title>
-    <link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/">
-</head>
-<body>
-    <div align="center">
-        <h1>Menu</h1>
-        <h2>Welcome</h2>
-        <p th:text="${name}"></p>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pizzeria</title>
+    </head>
+    <body>
+        <div align="center">
+            <h1>Menu</h1>
+            <h2>Welcome</h2>
+            <p th:text="${name}"></p>
 
-        <form th:object="${customer}" method="get">
-        </form>
-        <table th:cellpadding="10px">
-            <thead>
-            <tr>
-                <th> Number </th>
-                <th> Name </th>
-                <th> Price </th>
-            </tr>
-            </thead>
-            <tbody>
-            <form th:action="@{/order}" th:object="${addOrders}" method="post">
-                <tr th:each="prod : ${products}"  >
+            <form th:object="${customer}" method="get"></form>
 
-                        <td><span th:text="${prod.id}"  >  </span></td>
-                        <td><span th:text="${prod.name}" > </span></td>
-                        <td><span th:text="${prod.price } + PLN">  </span></td>
+            <table th:cellpadding="10px">
+                <thead>
+                    <tr>
+                        <th> Number </th>
+                        <th> Name </th>
+                        <th> Price </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <form th:action="@{/order}" th:object="${addOrders}" method="post">
+                        <tr th:each="prod : ${products}"  >
+                            <td><span th:text="${prod.id}"  >  </span></td>
+                            <td><span th:text="${prod.name}" > </span></td>
+                            <td><span th:text="${prod.price } + PLN">  </span></td>
+                        </tr>
 
+                        <label>Product number : </label>
+                        <span> <input type="number" min="1" max="18" th:field="*{product.id}" > </span>
+                        <label>Quantity : </label>
+                        <span> <input type="number" min="1" max="18"th:field="*{quantity}" > </span>
+                        <span> <input type="submit" value="Add product"> </span>
 
-                </tr>
-                <label>Product number : </label>
-                <span> <input type="number" min="1" max="18" th:field="*{product.id}" > </span>
-                <label>Quantity : </label>
-                <span> <input type="number" min="1" max="18"th:field="*{quantity}" > </span>
-
-
-                <span> <input type="submit" value="Add product"> </span>
+                        <br>
+                        <br>
+                    </form>
+                </tbody>
                 <br>
-                <br>
+            </table>
+
+            <br><br><form th:action="@{bill}">
+                <label> Total Price:  </label>
+                <label th:text="${bill}"></label>
             </form>
-            </tbody>
 
+            <br><form th:action="@{'/home'}">
+                <button type="submit"> Home</button>
+            </form>
+
+            <br><form th:action="@{'/customerOrders'}">
+                <button type="submit"> Basket</button>
+            </form>
             <br>
-
-        </table>
-
-        <br>
-        <br>
-        <form th:action="@{bill}">
-            <label> Total Price:  </label>
-            <label th:text="${bill}"></label>
-        </form>
-
-        <br>
-        <form th:action="@{'/home'}">
-            <button type="submit"> Home</button>
-        </form>
-        <br>
-        <form th:action="@{'/customerOrders'}">
-            <button type="submit"> Basket</button>
-        </form>
-        <br>
-
-
-
-
-    </div>
-
-
-
-
-</body>
+        </div>
+    </body>
 </html>

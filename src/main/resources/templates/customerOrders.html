@@ -4,64 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pizzeria</title>
-    <link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/">
 </head>
 <body>
-<div align="center">
-<h1>Your Orders</h1>
+    <div align="center">
+    <h1>Your Orders</h1>
 
-    <br>
-    <form th:action="@{'/home'}">
-        <button type="submit"> Home</button>
-    </form>
-    <br>
-    <form th:action="@{'/menu'}">
-        <button type="submit"> Menu</button>
-    </form>
-
-
-<table th:cellpadding="15px">
-    <thead>
-    <tr>
-        <th> ID </th>
-        <th> OrderID </th>
-        <th> Product </th>
-        <th> Quantity </th>
-        <th> Data </th>
-    </tr>
-    </thead>
-    <tbody>
-    <form th:action="@{/customerOrders}" th:object="${orders}" method="get">
-        <tr th:each="order : ${orders}"  >
-                <td><span th:text="${order.id}" > </span></td>
-                <td><span th:text="${order.orderID}" > </span></td>
-                <td><span th:text="${order.productID}"> </span></td>
-                <td><span th:text="${order.quantity }">  </span></td>
-                <td><span th:text="${order.data }">  </span></td>
-
-
-        </tr>
-    </form>
         <br>
-        <form th:action="@{/deleteOrder}" th:object="${delete}" method="post">
-            <label>If you want to delete an product, enter id : </label>
-            <input type="number" min="1" th:field="*{orderId}" id="orderId">
-            <input type="submit" value="Delete">
-
+        <form th:action="@{'/home'}">
+            <button type="submit"> Home</button>
         </form>
-    </tbody>
-    <br>
-
-
-</table>
-    <form th:action="@{'/email'}">
-        <label>If you send the order, you will receive confirmation via e-mail </label>
         <br>
-        <br>
-        <button type="submit"> Send order</button>
-    </form>
-</div>
+        <form th:action="@{'/menu'}">
+            <button type="submit"> Menu</button>
+        </form>
 
+        <table th:cellpadding="15px">
+            <thead>
+                <tr>
+                    <th> ID </th>
+                    <th> OrderID </th>
+                    <th> Product </th>
+                    <th> Quantity </th>
+                    <th> Data </th>
+                </tr>
+            </thead>
+            <tbody>
+                <form th:action="@{/customerOrders}" th:object="${orders}" method="get">
+                    <tr th:each="order : ${orders}"  >
+                            <td><span th:text="${order.id}" > </span></td>
+                            <td><span th:text="${order.orderID}" > </span></td>
+                            <td><span th:text="${order.productID}"> </span></td>
+                            <td><span th:text="${order.quantity }">  </span></td>
+                            <td><span th:text="${order.data }">  </span></td>
+
+
+                    </tr>
+                </form>
+                <br>
+                <form th:action="@{/deleteOrder}" th:object="${delete}" method="post">
+                    <label>If you want to delete an product, enter id : </label>
+                    <input type="number" min="1" th:field="*{orderId}" id="orderId">
+                    <input type="submit" value="Delete">
+
+                </form>
+            </tbody>
+            <br>
+        </table>
+
+        <form th:action="@{'/email'}">
+            <label>If you send the order, you will receive confirmation via e-mail </label>
+            <br>
+            <br>
+            <button type="submit"> Send order</button>
+        </form>
+    </div>
 </body>
 
 </html>

@@ -7,8 +7,6 @@ import lombok.Data;
 public class ProductReadModel {
 
     public String name;
-
-
     public ProductReadModel(Product productName) {
         name = productName.getName();
     }
