@@ -25,10 +25,7 @@ public class OrderController {
         return orderService.addOrder(order);
     }
 
-    @GetMapping("/lastID")
-    public Long lastID(){
-        return orderService.findLastId();
-    }
+
 
 
 

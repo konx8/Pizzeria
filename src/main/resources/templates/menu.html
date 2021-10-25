@@ -6,10 +6,10 @@
         <title>Pizzeria</title>
     </head>
     <body>
-        <div align="center">
+        <div align="center" >
             <h1>Menu</h1>
             <h2>Welcome</h2>
-            <p th:text="${name}"></p>
+
 
             <form th:object="${customer}" method="get"></form>
 
@@ -22,7 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <form th:action="@{/order}" th:object="${addOrders}" method="post">
+                    <form  th:action="@{/order/{id}(id=${userId})}" th:object="${dataToProductList}" method="post">
                         <tr th:each="prod : ${products}"  >
                             <td><span th:text="${prod.id}"  >  </span></td>
                             <td><span th:text="${prod.name}" > </span></td>
@@ -51,9 +51,11 @@
                 <button type="submit"> Home</button>
             </form>
 
-            <br><form th:action="@{'/customerOrders'}">
+            <br><form th:action="@{/customerOrders/{id}(id=${userId})}">
                 <button type="submit"> Basket</button>
             </form>
+
+        </form>
             <br>
         </div>
     </body>

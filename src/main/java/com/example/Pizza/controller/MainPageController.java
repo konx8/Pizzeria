@@ -2,7 +2,6 @@ package com.example.Pizza.controller;
 
 import com.example.Pizza.entity.Customer;
 import com.example.Pizza.entity.Order;
-import com.example.Pizza.entity.OrderProduct;
 import com.example.Pizza.service.CustomerService;
 import com.example.Pizza.service.OrderProductService;
 import com.example.Pizza.service.OrderService;
@@ -37,41 +36,19 @@ public class MainPageController{
     public String addCustomer(@ModelAttribute Customer customer) {
         Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
         Matcher mat = pattern.matcher(customer.getName());
-        if(customer.getName().isEmpty()) {
-            return "redirect:/home";
-        }
-        if (customerService.ifExist(customer.getName()) ) {
 
-            customerName(customer);
-            return "redirect:/customerOrders";
-        } else {
+        if (customerService.ifExist(customer.getName()) ) {
+            return "redirect:/customerOrders/" + customerService.getIdByCustomerName(customer.getName());
+        }
+        else {
             if(mat.matches()){
                 customerService.addCustomer(customer);
                 orderService.addOrder(new Order(customer));
-                customerName(customer);
-                return "redirect:/menu";
+
+                return "redirect:/menu/" + customer.getId();
             }
             return "redirect:/home";
         }
     }
-
-    public String customerName(Customer customer) {
-        nameCUST = customer.getName();
-        return nameCUST;
-    }
-
-    public String returnCustomerName() {
-        return nameCUST;
-    }
-
-    @PostMapping("/order")
-    public String setOrder(@ModelAttribute OrderProduct orderProduct){
-        Long customerId = customerService.getIdByCustomerName(returnCustomerName());
-        orderProductService.saveSingleProduct(orderProduct, customerId);
-        return "redirect:/menu";
-    }
-
-
-
 
 }

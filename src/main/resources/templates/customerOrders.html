@@ -6,58 +6,67 @@
     <title>Pizzeria</title>
 </head>
 <body>
-    <div align="center">
-    <h1>Your Orders</h1>
+<div align="center">
+    <h1>Your Basket</h1>
+
+    <br>
+    <form th:action="@{'/home'}">
+        <button type="submit"> Home</button>
+    </form>
+    <br>
+    <form th:action="@{/menu/{id}(id=${userId})}">
+        <button type="submit"> Menu</button>
+    </form>
+
+    <table th:cellpadding="15px">
+        <thead>
+        <tr>
+            <th> ID </th>
+            <th> OrderID </th>
+            <th> Product </th>
+            <th> Quantity </th>
+            <th> Data </th>
+        </tr>
+        </thead>
+        <tbody>
+
+            <tr th:each="order : ${orders}" >
+
+                <form th:action="@{/customerOrders/{id}(id=${userId})}" th:object="${orders}" method="get">
+                    <td><span th:text="${order.id}" > </span></td>
+                    <td><span th:text="${order.orderID}" > </span></td>
+                    <td><span th:text="${order.productID}"> </span></td>
+                    <td><span th:text="${order.quantity }">  </span></td>
+                    <td><span th:text="${order.data }">  </span></td>
+                </form>
+
+                    <td><form th:action="@{/deleteOrder/{orderId}(orderId=${order.id})}" method="post">
+                        <input type="submit" value="Delete">
+                    </form></td>
+            </tr>
 
         <br>
-        <form th:action="@{'/home'}">
-            <button type="submit"> Home</button>
-        </form>
+        </tbody>
         <br>
-        <form th:action="@{'/menu'}">
-            <button type="submit"> Menu</button>
-        </form>
+    </table>
 
-        <table th:cellpadding="15px">
-            <thead>
-                <tr>
-                    <th> ID </th>
-                    <th> OrderID </th>
-                    <th> Product </th>
-                    <th> Quantity </th>
-                    <th> Data </th>
-                </tr>
-            </thead>
-            <tbody>
-                <form th:action="@{/customerOrders}" th:object="${orders}" method="get">
-                    <tr th:each="order : ${orders}"  >
-                            <td><span th:text="${order.id}" > </span></td>
-                            <td><span th:text="${order.orderID}" > </span></td>
-                            <td><span th:text="${order.productID}"> </span></td>
-                            <td><span th:text="${order.quantity }">  </span></td>
-                            <td><span th:text="${order.data }">  </span></td>
+    <form th:action="@{/email/{id}(id=${userId})}">
+        <label>If you send the order, you will receive confirmation via e-mail </label>
+        <br><button type="submit"> Send order</button><br>
+    </form>
+
+    <br>
+    <form th:action="@{/addNewOrder/{id}(id=${userId})}">
+        <button type="submit"> Add New Order</button>
+    </form>
 
 
-                    </tr>
-                </form>
-                <br>
-                <form th:action="@{/deleteOrder}" th:object="${delete}" method="post">
-                    <label>If you want to delete an product, enter id : </label>
-                    <input type="number" min="1" th:field="*{orderId}" id="orderId">
-                    <input type="submit" value="Delete">
+    <br>
+    <form th:action="@{/history/{id}(id=${userId})}">
+        <button type="submit"> History</button>
+    </form>
 
-                </form>
-            </tbody>
-            <br>
-        </table>
-
-        <form th:action="@{'/email'}">
-            <label>If you send the order, you will receive confirmation via e-mail </label>
-            <br>
-            <br>
-            <button type="submit"> Send order</button>
-        </form>
-    </div>
+</div>
 </body>
 
 </html>

@@ -8,6 +8,7 @@ import javax.persistence.NonUniqueResultException;
 
 @Service
 @AllArgsConstructor
+
 public class CustomerService {
 
     private CustomerRepo customerRepo;
@@ -31,7 +32,16 @@ public class CustomerService {
 
     public Long getIdByCustomerName(String name) throws NonUniqueResultException {
         return customerRepo.getIdByName(name);
-
+    }
+    public Customer getCustomerById(Long id){
+        return customerRepo.getCustomerById(id);
     }
 
+    public String getCustomerByName(Long id){
+        return customerRepo.getCustomerByName(id);
+    }
+
+
 }
+
+

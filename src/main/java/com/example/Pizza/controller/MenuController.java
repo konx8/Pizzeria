@@ -8,9 +8,7 @@ import com.example.Pizza.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import javax.mail.MessagingException;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -23,29 +21,30 @@ public class MenuController {
     public OrderProductService orderProductService;
     public MainPageController mainPageController;
 
-    @GetMapping("/menu")
-    public String getAllProductList(Model model) {
+    @GetMapping(value ="/menu/{id}")
+    public String getAllProductList(@PathVariable Long id, Model model) {
+
         model.addAttribute("products", productService.getProductsList() );
-        model.addAttribute("addOrders", new OrderProduct());
-        model.addAttribute("customer", customerService.getCustomer(getOrderIdByCustomerName()));
-        model.addAttribute("name", mainPageController.returnCustomerName());
-        model.addAttribute("bill", customerBill());
+        model.addAttribute("dataToProductList", new OrderProduct());
+        model.addAttribute("customer", customerService.getCustomer(id));
+        model.addAttribute("bill", customerBill(id));
+        model.addAttribute("userId", id);
         return "menu";
     }
 
-    public Long getOrderIdByCustomerName(){
-        Long customerId = customerService.getIdByCustomerName(mainPageController.returnCustomerName());
-        return orderService.getOrderIdByCustomerID(customerId);
+    @PostMapping(value ="/order/{id}")
+    public String setOrder(@ModelAttribute OrderProduct orderProduct, @PathVariable Long id){
+
+
+        orderProductService.saveSingleProduct(orderProduct,orderService.findLastId(id));
+        return "redirect:/menu/" + id;
     }
-    @GetMapping("/email")
-    public String sendEmail() throws MessagingException {
-        orderProductService.dataToEmail(mainPageController.returnCustomerName(),getOrderIdByCustomerName());
-        return "redirect:/menu";
-    }
+
     @GetMapping("/bill")
-    public int customerBill() {
-        return orderProductService.getBill(getOrderIdByCustomerName());
+    public int customerBill(Long id) {
+        return orderProductService.getBill(orderService.findLastId(id));
     }
+
 
 
 }

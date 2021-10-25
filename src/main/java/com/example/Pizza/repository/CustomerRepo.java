@@ -13,4 +13,10 @@ public interface CustomerRepo extends JpaRepository<Customer, Long> {
     @Query(value = "SELECT * FROM CUSTOMER WHERE name = :name", nativeQuery = true)
     Long getIdByName(String name);
 
+    @Query(value = "SELECT * FROM CUSTOMER WHERE id = :id", nativeQuery = true)
+    Customer getCustomerById(Long id);
+
+    @Query(value = "SELECT name FROM CUSTOMER WHERE id = :id", nativeQuery = true)
+    String getCustomerByName(Long id);
+
 }

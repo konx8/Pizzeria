@@ -41,9 +41,8 @@ public class OrderProductService {
         }
         return orderProductViewList;
     }
-
-    public boolean existsById(Long id){
-        return orderProductRepo.existsById(id);
+    public OrderProduct findByLastRecord(){
+        return orderProductRepo.findByLastRecord();
     }
 
     public Iterable<OrderProduct> getAllOrderProducts(){
@@ -73,10 +72,15 @@ public class OrderProductService {
     }
 
     public OrderProduct saveSingleProduct(OrderProduct orderProduct, Long id){
+        OrderProduct orderProduct1 = new OrderProduct();
+
         Order order = orderRepo.getById(id);
-        orderProduct.setOrder(order);
-        orderProduct.setData(LocalDateTime.now());
-        return orderProductRepo.save(orderProduct);
+        orderProduct1.setQuantity(orderProduct.getQuantity());
+        orderProduct1.setProduct(orderProduct.getProduct());
+        orderProduct1.setOrder(order);
+        orderProduct1.setData(LocalDateTime.now());
+        orderProductRepo.save(orderProduct1);
+        return orderProduct1;
     }
 
     public boolean existsByOrderId(Long id) {

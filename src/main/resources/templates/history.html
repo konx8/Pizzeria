@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizzeria</title>
+</head>
+<body>
+
+    <div align="center">
+        <h1>Your Orders History</h1>
+
+        <table th:cellpadding="15px">
+            <thead>
+            <tr>
+                <th> ID </th>
+                <th> OrderID </th>
+                <th> Product </th>
+                <th> Quantity </th>
+                <th> Data </th>
+            </tr>
+            </thead>
+            <tbody>
+            <form th:action="@{/history/{id}(id=${userId})}" th:object="${allOrders}" method="get">
+                <tr th:each="order : ${allOrders}"  >
+                    <td><span th:text="${order.id}" > </span></td>
+                    <td><span th:text="${order.orderID}" > </span></td>
+                    <td><span th:text="${order.productID}"> </span></td>
+                    <td><span th:text="${order.quantity }">  </span></td>
+                    <td><span th:text="${order.data }">  </span></td>
+
+                </tr>
+            </form>
+            </tbody>
+            <br>
+        </table>
+
+        <br><form th:action="@{/customerOrders/{id}(id=${userId})}">
+        <button type="submit"> Back </button>
+    </form>
+    </div>
+
+</body>
+</html>
